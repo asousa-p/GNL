@@ -10,14 +10,14 @@
 
 char	*get_next_line(int fd);
 
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin(char *buffer, char *line);
 
 size_t  ft_strlen(char *str);
 
 char    *ft_strchr(char *str, int c);
 
-char    *clean_stash(char *stash);
+void    clean_buffer(char *buffer);
 
-char *extract_line(char *stash);
+char    *extract_line(char *line);
 
 #endif

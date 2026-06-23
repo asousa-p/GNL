@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asousa-p <asousa-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xsleepp <xsleepp@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 22:24:59 by asousa-p          #+#    #+#             */
-/*   Updated: 2026/05/29 19:10:13 by asousa-p         ###   ########.fr       */
+/*   Updated: 2026/06/23 23:16:44 by xsleepp          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,29 @@ size_t ft_strlen(char *str)
 	return (i);
 }
 
-char *ft_strjoin(char *s1, char *s2)
+char *ft_strjoin(char *line, char *buffer)
 {
 	int		i;
 	int		j;
-	char	*str;
+	char	*res;
 
 	i = 0;
 	j = 0;
-	if (!s1 || !s2)
+	if (!line || !buffer)
 		return (NULL);
-	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!str)
+	res = malloc(ft_strlen(line) + ft_strlen(buffer) + 1);
+	if (!res)
 		return (NULL);
-	while (s1[i])
+	while (line[i])
 	{
-		str[i] = s1[i];
+		res[i] = line[i];
 		i++;
 	}
-	while (s2[j])
-	{
-		str[i] = s2[j];
-		i++;
-		j++;
-	}
-	str[i] = '\0';
-	return (str);
+	while (buffer[j])
+		res[i++] = buffer[j++];
+	res[i] = '\0';
+	free(line);
+	return (res);
 }
 
 char *ft_strchr(char *str, int c)
@@ -66,55 +63,49 @@ char *ft_strchr(char *str, int c)
 	return (NULL);
 }
 
-char *clean_stash(char *stash)
+void	clean_buffer(char *buffer)
 {
 	int		i;
 	int		j;
-	char	*new;
 	
 	i = 0;
 	j = 0;
-	if (!stash)
-		return (NULL);
-	while (stash[i] != '\n' && stash[i])
+	if (!buffer)
+		return ;
+	while (buffer[i] != '\n' && buffer[i])
 		i++;
-	if (!stash[i])
-		return (NULL);
 	i++;
-	new = malloc(ft_strlen(stash) - i + 1);
-	if (!new)
-		return (NULL);
-	while (stash[i])
+	while (buffer[i])
 	{
-		new[j] = stash[i];
+		buffer[j] = buffer[i];
 		i++;
 		j++;
 	}
-	new[j] = '\0';
-	return (new);
+	buffer[j] = '\0';
+	return ;
 }
 
-char *extract_line(char *stash)
+char *extract_line(char *line)
 {
 	int		i;
-	char	*str;
+	char	*newline;
 
 	i = 0;
-	if (!stash)
+	if (!line)
 		return (NULL);
-	while (stash[i] != '\n' && stash[i])
+	while (line[i] != '\n' && line[i])
 		i++;
-	if (stash[i] == '\n')
+	if (line[i] == '\n')
 		i++;
-	str = malloc(i + 1);
-	if (!str)
+	newline = malloc(i + 1);
+	if (!newline)
 		return (NULL);
-	str[i] = '\0';
+	newline[i] = '\0';
 	i--;
 	while (i >= 0)
 	{
-		str[i] = stash[i];
+		newline[i] = line[i];
 		i--;
 	}
-	return (str);
+	return (newline);
 }
