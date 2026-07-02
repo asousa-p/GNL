@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xsleepp <xsleepp@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asousa-p <asousa-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 22:24:59 by asousa-p          #+#    #+#             */
-/*   Updated: 2026/07/02 03:14:28 by xsleepp          ###   ########.fr       */
+/*   Updated: 2026/07/02 05:05:32 by asousa-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t ft_strlen(char *str)
+size_t	ft_strlen(char *str)
 {
 	size_t	i;
+
 	if (!str)
 		return (0);
 	i = 0;
@@ -23,7 +24,7 @@ size_t ft_strlen(char *str)
 	return (i);
 }
 
-char *ft_strjoin(char *line, char *buffer)
+char	*ft_strjoin(char *line, char *buffer)
 {
 	int		i;
 	int		j;
@@ -35,20 +36,21 @@ char *ft_strjoin(char *line, char *buffer)
 	if (!res)
 		return (NULL);
 	if (line)
+	{
 		while (line[i])
 		{
 			res[i] = line[i];
 			i++;
 		}
+	}
 	while (buffer[j])
 		res[i++] = buffer[j++];
 	res[i] = '\0';
-	clean_buffer(buffer);
 	free(line);
 	return (res);
 }
 
-char *ft_strchr(char *str, int c)
+char	*ft_strchr(char *str, int c)
 {
 	int	i;
 
@@ -70,13 +72,18 @@ void	clean_buffer(char *buffer)
 {
 	int		i;
 	int		j;
-	
+
 	i = 0;
 	j = 0;
 	if (!buffer)
 		return ;
 	while (buffer[i] != '\n' && buffer[i])
 		i++;
+	if (!buffer[i])
+	{
+		buffer[0] = '\0';
+		return ;
+	}
 	i++;
 	while (buffer[i])
 	{
@@ -88,7 +95,7 @@ void	clean_buffer(char *buffer)
 	return ;
 }
 
-char *extract_line(char *line)
+char	*extract_line(char *line)
 {
 	int		i;
 	char	*newline;
