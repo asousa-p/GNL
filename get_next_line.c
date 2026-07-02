@@ -6,7 +6,7 @@
 /*   By: xsleepp <xsleepp@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 18:47:45 by asousa-p          #+#    #+#             */
-/*   Updated: 2026/06/30 20:41:10 by xsleepp          ###   ########.fr       */
+/*   Updated: 2026/07/02 03:20:45 by xsleepp          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,41 @@ char *get_next_line(int fd)
 	char		*newline;
 	int			bytes_read;     
     
-	if (fd == 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	line = malloc(1);
-    if (!line)
-        return (NULL);
-    line[0] = '\0';
+	line = NULL;
     if (buffer[0])
 		line = ft_strjoin(line, buffer);
 	while (!ft_strchr(line, '\n') && bytes_read != 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read <= 0)
+		if (bytes_read < 0)
+			return (free(line), NULL);
+		if (bytes_read == 0)
 			break ;
 		buffer[bytes_read] = '\0';
 		line = ft_strjoin(line, buffer);
 	}
-	clean_buffer(buffer);
 	newline = extract_line(line);
-	free(line);
 	return (newline);
 }
+/* 
+#include <fcntl.h>
+#include <stdio.h>
+
+int main(void) 
+{
+  	int fd = open("texto.txt", O_RDONLY);
+  	char *line;
+
+	while (1)
+  	{
+		line = get_next_line(fd);
+		printf("%s", line);
+		if (!line)
+			break ;
+		free(line);
+  	}
+  	return (0);
+}
+ */
