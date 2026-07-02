@@ -1,16 +1,19 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+//temp:
+# include <stdio.h>
+
 # include <unistd.h>
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 4
 # endif
 
 char	*get_next_line(int fd);
 
-char	*ft_strjoin(char *buffer, char *line);
+char	*ft_strjoin(char *line, char *buffer);
 
 size_t  ft_strlen(char *str);
 
