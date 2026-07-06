@@ -6,7 +6,7 @@
 /*   By: asousa-p <asousa-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 18:47:45 by asousa-p          #+#    #+#             */
-/*   Updated: 2026/07/02 05:09:43 by asousa-p         ###   ########.fr       */
+/*   Updated: 2026/07/06 17:52:09 by asousa-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 23
+#  define BUFFER_SIZE 13
 # endif
 
 char	*get_next_line(int fd);
